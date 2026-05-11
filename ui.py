@@ -32,6 +32,15 @@ COLOURS = {
     2048: "#edc22e",
 }
 
+BG = "#faf8ef"
+
+MOVE_FN = {
+    Direction.LEFT: move_left,
+    Direction.RIGHT: move_right,
+    Direction.UP: move_up,
+    Direction.DOWN: move_down,
+}
+
 
 def main() -> None:
     state = [create_initial_board()]
@@ -39,9 +48,10 @@ def main() -> None:
     # --- window ---
     root = tk.Tk()
     root.title("2048 game")
+    root.config(bg=BG)
 
     # --- tile grid ---
-    grid_frame = tk.Frame(root, bg="#bbada0")
+    grid_frame = tk.Frame(root, bg="#bbada0", padx=4, pady=4)
     grid_frame.pack(padx=10, pady=10)
 
     tile_labels = []
@@ -61,9 +71,7 @@ def main() -> None:
         tile_labels.append(row_labels)
 
     # --- status banner ---
-    status_label = tk.Label(
-        root, text="", font=("Helvetica", 20, "bold"), bg="white"
-    )
+    status_label = tk.Label(root, text="", font=("Helvetica", 20, "bold"), bg=BG)
     status_label.pack()
 
     # --- redraw: sync labels to board state ---
@@ -74,7 +82,7 @@ def main() -> None:
                 value = board[r][c]
                 tile_labels[r][c].config(
                     text=str(value) if value is not None else "",
-                    bg=COLOURS.get(value, "#ff0000"),
+                    bg=COLOURS[value],
                 )
         if won_game(board):
             status_label.config(text="You win!")
@@ -84,13 +92,6 @@ def main() -> None:
             status_label.config(text="")
 
     # --- move handler ---
-    MOVE_FN = {
-        Direction.LEFT: move_left,
-        Direction.RIGHT: move_right,
-        Direction.UP: move_up,
-        Direction.DOWN: move_down,
-    }
-
     def on_move(direction):
         board = state[0]
         if won_game(board) or lost_game(board):
@@ -108,7 +109,7 @@ def main() -> None:
     root.bind("<Down>", lambda e: on_move(Direction.DOWN))
 
     # --- buttons ---
-    button_frame = tk.Frame(root, bg="white")
+    button_frame = tk.Frame(root, bg=BG)
     button_frame.pack(pady=6)
 
     def on_new_game():
@@ -135,9 +136,7 @@ def main() -> None:
         font=("Helvetica", 14),
         command=on_suggest,
     ).pack(side=tk.LEFT, padx=6)
-    suggest_label = tk.Label(
-        button_frame, text="", font=("Helvetica", 14), bg="white"
-    )
+    suggest_label = tk.Label(button_frame, text="", font=("Helvetica", 14), bg=BG)
     suggest_label.pack(side=tk.LEFT, padx=6)
 
     redraw()

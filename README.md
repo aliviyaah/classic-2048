@@ -4,9 +4,9 @@ A Python implementation of the 2048 puzzle game, built with Tkinter.
 
 ## How to play
 
-Use the arrow keys to slide the tiles. When two tiles with the same number collide, they merge into one. Reach the **2048 tile** to win — or keep going for a higher score. Press **New Game** to reset, or **Suggest** to ask the AI for its recommended move.
+Use the arrow keys to slide the tiles. When two tiles with the same number collide, they merge into one. Reach the **2048 tile** to win. Press **New Game** to reset, or **Suggest** to ask the AI for its recommended move.
 
-![2048 game screenshot](2048-example.png)
+![2048 game screenshot](2048-ss.png)
 
 ## Run
 
