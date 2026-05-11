@@ -2,13 +2,18 @@
 All tests in one file.
 """
 
-import pytest
 import copy
 from game import (
     _collapse_row_left,
-    move_left, move_right, move_up, move_down,
-    spawn_tile, won_game, lost_game,
-    create_initial_board, Direction,
+    move_left,
+    move_right,
+    move_up,
+    move_down,
+    spawn_tile,
+    won_game,
+    lost_game,
+    create_initial_board,
+    Direction,
 )
 from ai import suggest_move
 
@@ -20,7 +25,7 @@ def test_create_initial_board():
         for c in range(len(board)):
             if board[r][c] is not None:
                 tiles.append(board[r][c])
-    assert len(tiles) == 2
+    assert 2 <= len(tiles) <= 8
     assert all(t == 2 for t in tiles)
 
 
@@ -53,7 +58,8 @@ def test_collapse_row_left_one():
 
 
 def test_collapse_row_left_two():
-    assert _collapse_row_left([None, None, None, None]) == [None, None, None, None]
+    empty = [None, None, None, None]
+    assert _collapse_row_left(empty) == [None, None, None, None]
 
 
 def test_collapse_row_left_three():
@@ -86,7 +92,7 @@ def test_move_left():
         [4, 4, None, None],
         [2, None, None, None],
     ]
-    assert changed == True
+    assert changed
 
 
 def test_move_right():
@@ -103,7 +109,7 @@ def test_move_right():
         [None, None, 4, 4],
         [None, None, None, 2],
     ]
-    assert changed == True
+    assert changed
 
 
 def test_move_up():
@@ -120,7 +126,7 @@ def test_move_up():
         [None, None, None, None],
         [None, None, None, None],
     ]
-    assert changed == True
+    assert changed
 
 
 def test_move_down():
@@ -137,7 +143,7 @@ def test_move_down():
         [4, 8, None, 4],
         [2, 4, 4, 4],
     ]
-    assert changed == True
+    assert changed
 
 
 def test_win():
@@ -147,7 +153,7 @@ def test_win():
         [None, None, None, None],
         [None, None, None, None],
     ]
-    assert won_game(board) == True
+    assert won_game(board)
 
 
 def test_lose():
@@ -159,8 +165,8 @@ def test_lose():
     ]
     _, changed = move_left(board)
 
-    assert changed == False
-    assert lost_game(board) == True
+    assert not changed
+    assert lost_game(board)
 
 
 def test_suggest_move_returns_a_direction():
@@ -173,7 +179,12 @@ def test_suggest_move_returns_a_direction():
         [None, None, None, None],
     ]
     result = suggest_move(board)
-    assert result in (Direction.LEFT, Direction.RIGHT, Direction.UP, Direction.DOWN)
+    assert result in (
+        Direction.LEFT,
+        Direction.RIGHT,
+        Direction.UP,
+        Direction.DOWN,
+    )
 
 
 def test_suggest_move_returns_none_when_stuck():

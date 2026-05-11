@@ -2,30 +2,34 @@
 UI created from Tkinter.
 A thin layer calling game.py and ai.py.
 """
+
 import tkinter as tk
 from game import (
     create_initial_board,
     spawn_tile,
-    move_left, move_right, move_up, move_down,
-    won_game, lost_game,
+    move_left,
+    move_right,
+    move_up,
+    move_down,
+    won_game,
+    lost_game,
     Direction,
 )
 from ai import suggest_move
 
-
 COLOURS = {
-    None:  "#cdc1b4",
-    2:     "#eee4da",
-    4:     "#ede0c8",
-    8:     "#f2b179",
-    16:    "#f59563",
-    32:    "#f67c5f",
-    64:    "#f65e3b",
-    128:   "#edcf72",
-    256:   "#edcc61",
-    512:   "#edc850",
-    1024:  "#edc53f",
-    2048:  "#edc22e",
+    None: "#cdc1b4",
+    2: "#eee4da",
+    4: "#ede0c8",
+    8: "#f2b179",
+    16: "#f59563",
+    32: "#f67c5f",
+    64: "#f65e3b",
+    128: "#edcf72",
+    256: "#edcc61",
+    512: "#edc850",
+    1024: "#edc53f",
+    2048: "#edc22e",
 }
 
 
@@ -53,8 +57,10 @@ def main() -> None:
             label.grid(row=r, column=c, padx=4, pady=4)
             row_labels.append(label)
         tile_labels.append(row_labels)
-    
-    status_label = tk.Label(root, text="", font=("Helvetica", 20, "bold"), bg="white")
+
+    status_label = tk.Label(
+        root, text="", font=("Helvetica", 20, "bold"), bg="white"
+    )
     status_label.pack()
 
     def redraw():
@@ -74,10 +80,10 @@ def main() -> None:
             status_label.config(text="")
 
     MOVE_FN = {
-        Direction.LEFT:  move_left,
+        Direction.LEFT: move_left,
         Direction.RIGHT: move_right,
-        Direction.UP:    move_up,
-        Direction.DOWN:  move_down,
+        Direction.UP: move_up,
+        Direction.DOWN: move_down,
     }
 
     def on_move(direction):
@@ -90,10 +96,10 @@ def main() -> None:
             spawn_tile(state[0])
         redraw()
 
-    root.bind("<Left>",  lambda e: on_move(Direction.LEFT))
+    root.bind("<Left>", lambda e: on_move(Direction.LEFT))
     root.bind("<Right>", lambda e: on_move(Direction.RIGHT))
-    root.bind("<Up>",    lambda e: on_move(Direction.UP))
-    root.bind("<Down>",  lambda e: on_move(Direction.DOWN))
+    root.bind("<Up>", lambda e: on_move(Direction.UP))
+    root.bind("<Down>", lambda e: on_move(Direction.DOWN))
 
     button_frame = tk.Frame(root, bg="white")
     button_frame.pack(pady=6)
@@ -110,9 +116,21 @@ def main() -> None:
         else:
             suggest_label.config(text=f"Suggest: {direction.value.upper()}")
 
-    tk.Button(button_frame, text="New Game", font=("Helvetica", 14), command=on_new_game).pack(side=tk.LEFT, padx=6)
-    tk.Button(button_frame, text="Suggest",  font=("Helvetica", 14), command=on_suggest).pack(side=tk.LEFT, padx=6)
-    suggest_label = tk.Label(button_frame, text="", font=("Helvetica", 14), bg="white")
+    tk.Button(
+        button_frame,
+        text="New Game",
+        font=("Helvetica", 14),
+        command=on_new_game,
+    ).pack(side=tk.LEFT, padx=6)
+    tk.Button(
+        button_frame,
+        text="Suggest",
+        font=("Helvetica", 14),
+        command=on_suggest,
+    ).pack(side=tk.LEFT, padx=6)
+    suggest_label = tk.Label(
+        button_frame, text="", font=("Helvetica", 14), bg="white"
+    )
     suggest_label.pack(side=tk.LEFT, padx=6)
 
     redraw()

@@ -4,10 +4,10 @@ Greedy AI suggester — offline, no dependencies.
 Strategy: try each of the four moves; pick the one that leaves the most
 empty cells. Optimise for the most immediate empty space.
 """
+
 from typing import Optional
 
 from game import Board, Direction, move_left, move_right, move_up, move_down
-
 
 moves = {
     Direction.LEFT: move_left,
@@ -33,9 +33,9 @@ def suggest_move(board: Board) -> Optional[Direction]:
                 for cell in row:
                     if cell is None:
                         score += 1
-            
+
             if score > best_score:
-                best_score = score 
+                best_score = score
                 best_direction = direction
-    
+
     return best_direction

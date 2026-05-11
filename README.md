@@ -37,7 +37,7 @@ Each move is decomposed into compress → merge → compress on rows; right/up/d
 ## Assumptions
 
 - Board is 4x4.
-- Initial board: Two `2`s placed at random cells.
+- Initial board: a random number of `2`s (between 2 and 8) placed at random cells.
 - New-tile spawn ratio: 90% `2`, 10% `4`.
 - Win condition: any cell reaches 2048.
 - Loss condition: board is full AND no move in any direction would change it.
