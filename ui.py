@@ -36,9 +36,11 @@ COLOURS = {
 def main() -> None:
     state = [create_initial_board()]
 
+    # --- window ---
     root = tk.Tk()
     root.title("2048 game")
 
+    # --- tile grid ---
     grid_frame = tk.Frame(root, bg="#bbada0")
     grid_frame.pack(padx=10, pady=10)
 
@@ -58,11 +60,13 @@ def main() -> None:
             row_labels.append(label)
         tile_labels.append(row_labels)
 
+    # --- status banner ---
     status_label = tk.Label(
         root, text="", font=("Helvetica", 20, "bold"), bg="white"
     )
     status_label.pack()
 
+    # --- redraw: sync labels to board state ---
     def redraw():
         board = state[0]
         for r in range(4):
@@ -79,6 +83,7 @@ def main() -> None:
         else:
             status_label.config(text="")
 
+    # --- move handler ---
     MOVE_FN = {
         Direction.LEFT: move_left,
         Direction.RIGHT: move_right,
@@ -96,11 +101,13 @@ def main() -> None:
             spawn_tile(state[0])
         redraw()
 
+    # --- key bindings ---
     root.bind("<Left>", lambda e: on_move(Direction.LEFT))
     root.bind("<Right>", lambda e: on_move(Direction.RIGHT))
     root.bind("<Up>", lambda e: on_move(Direction.UP))
     root.bind("<Down>", lambda e: on_move(Direction.DOWN))
 
+    # --- buttons ---
     button_frame = tk.Frame(root, bg="white")
     button_frame.pack(pady=6)
 
