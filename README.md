@@ -11,6 +11,8 @@ A Python implementation of the 2048 puzzle game, built with Tkinter.
 - **New Game** — reset the board
 - **Suggest** — ask the AI for its recommended move
 
+<br>
+
 ![2048 game screenshot](2048-ss.png)
 
 ## Run
