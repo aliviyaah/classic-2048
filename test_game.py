@@ -82,14 +82,14 @@ def test_move_left():
     board = [
         [None, 8, 2, 2],
         [4, 2, None, 2],
-        [2, 2, 2, 2],
+        [None, None, None, None],
         [None, None, None, 2],
     ]
     new_board, changed = move_left(board)
     assert new_board == [
         [8, 4, None, None],
         [4, 4, None, None],
-        [4, 4, None, None],
+        [None, None, None, None],
         [2, None, None, None],
     ]
     assert changed
@@ -99,14 +99,14 @@ def test_move_right():
     board = [
         [None, 8, 2, 2],
         [4, 2, None, 2],
-        [2, 2, 2, 2],
+        [None, None, None, None],
         [None, None, None, 2],
     ]
     new_board, changed = move_right(board)
     assert new_board == [
         [None, None, 8, 4],
         [None, None, 4, 4],
-        [None, None, 4, 4],
+        [None, None, None, None],
         [None, None, None, 2],
     ]
     assert changed
@@ -116,13 +116,13 @@ def test_move_up():
     board = [
         [None, 8, 2, 2],
         [4, 2, None, 2],
-        [2, 2, 2, 2],
+        [None, None, None, None],
         [None, None, None, 2],
     ]
     new_board, changed = move_up(board)
     assert new_board == [
-        [4, 8, 4, 4],
-        [2, 4, None, 4],
+        [4, 8, 2, 4],
+        [None, 2, None, 2],
         [None, None, None, None],
         [None, None, None, None],
     ]
@@ -133,15 +133,15 @@ def test_move_down():
     board = [
         [None, 8, 2, 2],
         [4, 2, None, 2],
-        [2, 2, 2, 2],
+        [None, None, None, None],
         [None, None, None, 2],
     ]
     new_board, changed = move_down(board)
     assert new_board == [
         [None, None, None, None],
         [None, None, None, None],
-        [4, 8, None, 4],
-        [2, 4, 4, 4],
+        [None, 8, None, 2],
+        [4, 2, 2, 4],
     ]
     assert changed
 
